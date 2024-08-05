@@ -19,6 +19,7 @@ func atoi(s string) int {
 func isNumeric(s string) bool {
 	status := true
 
+	// End function when non-numeric character is found
 	for _, v := range s {
 		if !(v >= '0' && v <= '9') {
 			status = false
