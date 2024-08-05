@@ -20,3 +20,15 @@ func atoi(s string) (int, string) {
 
 	return result, err
 }
+
+func isNumeric(s string) bool {
+	status := true
+
+	for _, v := range s {
+		if !(v >= '0' && v <= '9') {
+			status = false
+			break
+		}
+	}
+	return status
+}
