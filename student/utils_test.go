@@ -15,11 +15,24 @@ func TestAtoi(t *testing.T) {
 	}
 }
 
+func TestIsNumeric(t *testing.T) {
+	test := "TestIsNumeric"
+	subject := "3MIN3M"
+	got := isNumeric(subject) // Extract output for testing
+	expected := false
+
+	if got != expected {
+		t.Errorf("Got: %t", got)
+		t.Errorf("Expected: %t", expected)
+		t.Errorf("%s Failed!", test)
+	}
+}
+
 // func Test(t *testing.T) {
 // 	test := "Test"
 // 	subject :=
 // 	got := // Extract output for testing
-// 	expected := 
+// 	expected :=
 
 // 	if got != expected {
 // 		t.Errorf("Got: %v", got)
