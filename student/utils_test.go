@@ -33,10 +33,11 @@ func TestIsNumeric(t *testing.T) {
 // 	subject :=
 // 	got := // Extract output for testing
 // 	expected :=
-
+// 	expected :=
 // 	if got != expected {
 // 		t.Errorf("Got: %v", got)
 // 		t.Errorf("Expected: %v", expected)
 // 		t.Errorf("%s Failed!", test)
 // 	}
+// }
 // }
