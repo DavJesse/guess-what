@@ -1,10 +1,10 @@
 package main
 
-func atoi(s string) (int, string) {
+func atoi(s string) int {
 	var result int
 	var intSlc []int
-	var err string
 
+	// Convert to integer character by character
 	for _, v := range s {
 		intSlc = append(intSlc, int(v-'0'))
 	}
@@ -13,7 +13,7 @@ func atoi(s string) (int, string) {
 		result = (result * 10) + intSlc[i]
 	}
 
-	return result, err
+	return result
 }
 
 func isNumeric(s string) bool {
