@@ -1,4 +1,4 @@
-# guess-It-2
+# guess-it-2
 
 ## Overview
 
