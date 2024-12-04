@@ -1,46 +1,48 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"log"
 	"os"
-	"strings"
+	"strconv"
 
 	"linear-stats/files"
 	"linear-stats/maths"
 )
 
 func main() {
-	args := os.Args[1:]
+	scanner := bufio.NewScanner(os.Stdin)
+	var index, input []int
+	var i int
 
-	// Handle insufficient or incorrect number of arguments
-	if len(args) != 1 {
-		log.Fatal("Please provide a single file path to a valid text file as an argument.")
+	// Grab input and indices from standard input
+	// Convert input to integer
+	// Append input to data
+	// Handle errors
+	for scanner.Scan() {
+		num, err := strconv.Atoi(scanner.Text())
+		if err != nil {
+			log.Println("This program only accepts numeric input\nPlease enter numeric values only.")
+			continue
+		}
+
+		input = append(input, num)
+		index = append(index, i)
+		i++
+
+		if len(input) < 4 {
+			lower, upper := files.PrematureGuess(input)
+			fmt.Printf("%d - %d\n", lower, upper)
+		} else {
+			// Calculate slope, y-intercept, and Pearson correlation coefficient to express linear regression and Pearson correlation coefficient
+			slope := maths.CalculateSlope(index, input)
+			yIntercept := maths.CalculateYIntercept(index, input)
+			PearsonCoefficient := maths.PearsonCoefficient(index, input)
+
+			fmt.Println(slope, "\n", yIntercept, "\n", PearsonCoefficient)
+
+		}
+
 	}
-
-	// Define file path from arguments
-	// Check file validity from its extenstion
-	filePath := args[0]
-
-	if !(strings.HasSuffix(filePath, ".txt")) {
-		log.Fatalf("Invalid file format: %v is not a text file", filePath)
-	}
-
-	data := files.ReadFile(filePath)
-
-	// Filter out empty files parsed as data
-	if len(data) == 0 {
-		log.Fatal("File parsed as data is empty.")
-	}
-
-	// Establish input and output arrays as parameters
-	input, output := files.ExtractParams(data)
-
-	// Calculate slope, y-intercept, and Pearson correlation coefficient to express linear regression and Pearson correlation coefficient
-	slope := maths.CalculateSlope(input, output)
-	yIntercept := maths.CalculateYIntercept(input, output)
-	PearsonCoefficient := maths.PearsonCoefficient(input, output)
-
-	fmt.Printf("Linear Regression Line: y = %.6fx + %.6f\n", slope, yIntercept)
-	fmt.Printf("Pearson Correlation Coefficient: %.10f\n", PearsonCoefficient)
 }
