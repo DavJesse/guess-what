@@ -7,6 +7,7 @@ import (
 	"os"
 	"strconv"
 
+	"linear-stats/files"
 	"linear-stats/maths"
 )
 
@@ -29,13 +30,19 @@ func main() {
 		input = append(input, num)
 		index = append(index, i)
 		i++
-		fmt.Println(index, "\n", input)
 
-		// Calculate slope, y-intercept, and Pearson correlation coefficient to express linear regression and Pearson correlation coefficient
-		slope := maths.CalculateSlope(index, input)
-		yIntercept := maths.CalculateYIntercept(index, input)
-		PearsonCoefficient := maths.PearsonCoefficient(index, input)
+		if len(input) < 4 {
+			lower, upper := files.PrematureGuess(input)
+			fmt.Printf("%d - %d\n", lower, upper)
+		} else {
+			// Calculate slope, y-intercept, and Pearson correlation coefficient to express linear regression and Pearson correlation coefficient
+			slope := maths.CalculateSlope(index, input)
+			yIntercept := maths.CalculateYIntercept(index, input)
+			PearsonCoefficient := maths.PearsonCoefficient(index, input)
 
-		fmt.Println(slope, "\n", yIntercept, "\n", PearsonCoefficient)
+			fmt.Println(slope, "\n", yIntercept, "\n", PearsonCoefficient)
+
+		}
+
 	}
 }
