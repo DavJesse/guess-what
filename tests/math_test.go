@@ -75,3 +75,14 @@ func TestCalculateYIntercept(t *testing.T) {
 		t.Error("TestVariance Failed")
 	}
 }
+
+func TestPrematureGuess(t *testing.T) {
+	input := []int{136, 190, 173}
+	gotLower, gotUpper := files.PrematureGuess(input)
+	expectedLower, expectedUpper := 83, 249
+
+	if gotLower != expectedLower || gotUpper != expectedUpper {
+		t.Errorf("Expected: (%d, %d), Got: (%d, %d)", expectedLower, expectedUpper, gotLower, gotUpper)
+		t.Error("TestPrematureGuess Failed")
+	}
+}
