@@ -1,3 +1,3 @@
-module linear-stats
+module student
 
 go 1.23.0
