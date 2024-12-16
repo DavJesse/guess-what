@@ -11,6 +11,7 @@ import (
 )
 
 func main() {
+	var c int
 	args := os.Args[1:]
 
 	// Handle insufficient or incorrect number of arguments
@@ -38,9 +39,13 @@ func main() {
 
 	// Calculate slope, y-intercept, and Pearson correlation coefficient to express linear regression and Pearson correlation coefficient
 	slope := maths.CalculateSlope(input, output)
-	yIntercept := maths.CalculateYIntercept(input, output)
-	PearsonCoefficient := maths.PearsonCoefficient(input, output)
+	// yIntercept := maths.CalculateYIntercept(input, output)
+	// PearsonCoefficient := maths.PearsonCoefficient(input, output)
 
-	fmt.Printf("Linear Regression Line: y = %.6fx + %.6f\n", slope, yIntercept)
-	fmt.Printf("Pearson Correlation Coefficient: %.10f\n", PearsonCoefficient)
+	y := slope*float64(len(input)) + float64(c)
+
+	upperLimit := int(y) + 83
+	lowerLimit := int(y) - 83
+
+	fmt.Printf("%d - %d\n", upperLimit, lowerLimit)
 }
