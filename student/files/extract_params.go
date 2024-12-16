@@ -19,8 +19,8 @@ func ExtractParams(data []int) ([]int, []int) {
 func PrematureGuess(input []int) (int, int) {
 	// Use average to establish upper and lower limits for a guess
 	average := maths.Mean(input)
-	upperLimit := int(math.Round(average)) + 83
-	lowerLimit := int(math.Round(average)) - 83
+	upperLimit := int(math.Round(average)) + 93
+	lowerLimit := int(math.Round(average)) - 93
 
 	return int(lowerLimit), int(upperLimit)
 }
