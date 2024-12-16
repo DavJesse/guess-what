@@ -6,8 +6,8 @@ import (
 	"os"
 	"strings"
 
-	"linear-stats/files"
-	"linear-stats/maths"
+	"student/files"
+	"student/maths"
 )
 
 func main() {

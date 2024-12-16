@@ -5,8 +5,8 @@ import (
 	"reflect"
 	"testing"
 
-	"linear-stats/files"
-	"linear-stats/maths"
+	"student/files"
+	"student/maths"
 )
 
 func TestMean(t *testing.T) {

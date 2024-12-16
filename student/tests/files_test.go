@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	"linear-stats/files"
+	"student/files"
 )
 
 func TestReadFile_EmptyFile(t *testing.T) {
