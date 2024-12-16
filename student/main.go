@@ -34,29 +34,30 @@ func main() {
 		}
 
 		data = append(data, num)
+
+		// Filter out empty files parsed as data
+		if len(data) == 0 {
+			log.Fatal("File parsed as data is empty.")
+		}
+
+		// Establish input and output arrays as parameters
+		input, output := files.ExtractParams(data)
+
+		if len(input) < 4 {
+			lowerLimit, upperLimit = files.PrematureGuess(data)
+		} else {
+			// Calculate slope, y-intercept, and Pearson correlation coefficient to express linear regression and Pearson correlation coefficient
+			slope := maths.CalculateSlope(input, output)
+			// yIntercept := maths.CalculateYIntercept(input, output)
+			// PearsonCoefficient := maths.PearsonCoefficient(input, output)
+
+			y := slope*float64(len(input)) + float64(c.Value)
+
+			upperLimit = int(y) + 83
+			lowerLimit = int(y) - 83
+		}
+
+		fmt.Printf("%d - %d\n", upperLimit, lowerLimit)
 	}
 
-	// Filter out empty files parsed as data
-	if len(data) == 0 {
-		log.Fatal("File parsed as data is empty.")
-	}
-
-	// Establish input and output arrays as parameters
-	input, output := files.ExtractParams(data)
-
-	if len(input) < 4 {
-		lowerLimit, upperLimit = files.PrematureGuess(input)
-	} else {
-		// Calculate slope, y-intercept, and Pearson correlation coefficient to express linear regression and Pearson correlation coefficient
-		slope := maths.CalculateSlope(input, output)
-		// yIntercept := maths.CalculateYIntercept(input, output)
-		// PearsonCoefficient := maths.PearsonCoefficient(input, output)
-
-		y := slope*float64(len(input)) + float64(c.Value)
-
-		upperLimit = int(y) + 83
-		lowerLimit = int(y) - 83
-	}
-
-	fmt.Printf("%d - %d\n", upperLimit, lowerLimit)
 }
