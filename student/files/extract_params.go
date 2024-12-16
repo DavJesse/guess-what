@@ -1,8 +1,8 @@
 package files
 
 import (
-	"linear-stats/maths"
 	"math"
+	"student/maths"
 )
 
 func ExtractParams(data []int) ([]int, []int) {
