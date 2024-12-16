@@ -1,33 +1,39 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"log"
 	"os"
-	"strings"
+	"strconv"
 
 	"student/files"
 	"student/maths"
 )
 
+type FirstValue struct {
+	Value   int
+	IsEmpty bool
+}
+
 func main() {
-	var c int
-	args := os.Args[1:]
+	var data []int
+	c := FirstValue{IsEmpty: true}        // To capture value of x when y is zero
+	scanner := bufio.NewScanner(os.Stdin) // Initialize scanner
 
-	// Handle insufficient or incorrect number of arguments
-	if len(args) != 1 {
-		log.Fatal("Please provide a single file path to a valid text file as an argument.")
+	// Capture user input until EOF
+	for scanner.Scan() {
+		num, err := strconv.Atoi(scanner.Text())
+		if err != nil {
+			fmt.Println("Invalid input. Please enter a valid number.")
+		}
+		if c.IsEmpty {
+			c.Value = num
+			c.IsEmpty = false
+		}
+
+		data = append(data, num)
 	}
-
-	// Define file path from arguments
-	// Check file validity from its extenstion
-	filePath := args[0]
-
-	if !(strings.HasSuffix(filePath, ".txt")) {
-		log.Fatalf("Invalid file format: %v is not a text file", filePath)
-	}
-
-	data := files.ReadFile(filePath)
 
 	// Filter out empty files parsed as data
 	if len(data) == 0 {
@@ -42,7 +48,7 @@ func main() {
 	// yIntercept := maths.CalculateYIntercept(input, output)
 	// PearsonCoefficient := maths.PearsonCoefficient(input, output)
 
-	y := slope*float64(len(input)) + float64(c)
+	y := slope*float64(len(input)) + float64(c.Value)
 
 	upperLimit := int(y) + 83
 	lowerLimit := int(y) - 83
