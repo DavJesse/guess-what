@@ -57,7 +57,7 @@ func main() {
 			lowerLimit = int(y) - 83
 		}
 
-		fmt.Printf("%d - %d\n", lowerLimit, upperLimit)
+		fmt.Printf("%d %d\n", lowerLimit, upperLimit)
 	}
 
 }
