@@ -17,6 +17,7 @@ type FirstValue struct {
 }
 
 func main() {
+	var upperLimit, lowerLimit int
 	var data []int
 	c := FirstValue{IsEmpty: true}        // To capture value of x when y is zero
 	scanner := bufio.NewScanner(os.Stdin) // Initialize scanner
@@ -43,15 +44,19 @@ func main() {
 	// Establish input and output arrays as parameters
 	input, output := files.ExtractParams(data)
 
-	// Calculate slope, y-intercept, and Pearson correlation coefficient to express linear regression and Pearson correlation coefficient
-	slope := maths.CalculateSlope(input, output)
-	// yIntercept := maths.CalculateYIntercept(input, output)
-	// PearsonCoefficient := maths.PearsonCoefficient(input, output)
+	if len(input) < 4 {
+		lowerLimit, upperLimit = files.PrematureGuess(input)
+	} else {
+		// Calculate slope, y-intercept, and Pearson correlation coefficient to express linear regression and Pearson correlation coefficient
+		slope := maths.CalculateSlope(input, output)
+		// yIntercept := maths.CalculateYIntercept(input, output)
+		// PearsonCoefficient := maths.PearsonCoefficient(input, output)
 
-	y := slope*float64(len(input)) + float64(c.Value)
+		y := slope*float64(len(input)) + float64(c.Value)
 
-	upperLimit := int(y) + 83
-	lowerLimit := int(y) - 83
+		upperLimit = int(y) + 83
+		lowerLimit = int(y) - 83
+	}
 
 	fmt.Printf("%d - %d\n", upperLimit, lowerLimit)
 }
