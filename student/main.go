@@ -43,7 +43,7 @@ func main() {
 		// Establish input and output arrays as parameters
 		input, output := files.ExtractParams(data)
 
-		if len(input) < 4 {
+		if len(input) < 100 {
 			lowerLimit, upperLimit = files.PrematureGuess(data)
 		} else {
 			// Calculate slope, y-intercept, and Pearson correlation coefficient to express linear regression and Pearson correlation coefficient
@@ -53,8 +53,8 @@ func main() {
 
 			y := slope*float64(len(input)) + float64(c.Value)
 
-			upperLimit = int(y) + 83
-			lowerLimit = int(y) - 83
+			upperLimit = int(y) + 40
+			lowerLimit = int(y) - 100
 		}
 
 		fmt.Printf("%d %d\n", lowerLimit, upperLimit)
