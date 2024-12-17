@@ -140,3 +140,24 @@ func TestRemoveOutlier_BigDataNoOutlier(t *testing.T) {
 		e++
 	}
 }
+
+func TestIsOutlier(t *testing.T) {
+	data := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	nums := []int{7, 170}
+	var got []bool
+
+	for _, num := range nums {
+		if maths.IsOutlier(num, data) {
+			got = append(got, true)
+		} else {
+			got = append(got, false)
+		}
+	}
+
+	expected := []bool{false, true}
+
+	if !reflect.DeepEqual(got, expected) {
+		t.Errorf("Expected: %t, Got: %t", expected, got)
+		t.Error("TestIsOutlier Failed!")
+	}
+}
