@@ -85,6 +85,34 @@ func CalculateYIntercept(input, output []int) float64 {
 	return meanOutput - (slope * meanInput)
 }
 
+// Calculates the median of a given data set
+func Median(numSlc []int) float64 {
+	var median float64
+	var medSlc []int
+
+	// Establish a reference index for the median value
+	half := len(numSlc) / 2
+	sort.Ints(numSlc)
+
+	if len(numSlc) > 2 {
+		// If even, the median value will be at index 'half'
+		if len(numSlc)%2 != 0 {
+			median = float64(numSlc[half])
+
+		} else {
+			// if even the median will be the average of the middle values at indices 'half-1' and 'half'
+			medSlc = append(medSlc, numSlc[half-1], numSlc[half])
+			median = Mean(medSlc)
+		}
+
+	} else {
+		// If one or two items in the slice, the median is the average
+		median = Mean(numSlc)
+	}
+
+	return median
+}
+
 // Identifies and expells outliers from the given data
 func RemoveOutlier(data []int) []int {
 	var result []int
