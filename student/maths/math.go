@@ -3,6 +3,7 @@ package maths
 import (
 	"log"
 	"math"
+	"sort"
 )
 
 func Mean(nums []int) float64 {
@@ -82,4 +83,33 @@ func CalculateYIntercept(input, output []int) float64 {
 	meanOutput := Mean(output)
 
 	return meanOutput - (slope * meanInput)
+}
+
+// Identifies and expells outliers from the given data
+func RemoveOutlier(data []int) []int {
+	var result []int
+	if len(data) < 3 {
+		return data
+	}
+	copy := append([]int(nil), data...)
+
+	midPoint := len(copy) / 2
+	sort.Ints(copy)
+
+	firstQuartile := Median(copy[:midPoint])
+	thirdQuartile := Median(copy[midPoint:])
+	IQR := thirdQuartile - firstQuartile
+
+	// Establish uper and lower bounds for outliers
+	lowLimit := int(firstQuartile - IQR*2.5)
+	upLimit := int(thirdQuartile + IQR*2.5)
+
+	// Only include non-outliers in the result
+	for _, num := range data {
+		if num >= lowLimit && num <= upLimit {
+			result = append(result, num)
+		}
+	}
+
+	return result
 }
