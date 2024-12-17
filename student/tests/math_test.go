@@ -104,7 +104,9 @@ func TestRemoveOutlier_SmallData(t *testing.T) {
 	subject := []int{1, 2, 3, 4, 5}
 	got := maths.RemoveOutlier(subject)
 	expected := []int{1, 2, 3, 4, 5}
+
 	var g, e int
+
 	for g < len(got) && e < len(expected) {
 		if got[g] != expected[e] {
 			t.Errorf("Got: %d", got)
@@ -115,11 +117,14 @@ func TestRemoveOutlier_SmallData(t *testing.T) {
 		e++
 	}
 }
+
 func TestRemoveOutlier_BigDataNoOutlier(t *testing.T) {
 	subject := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16}
 	got := maths.RemoveOutlier(subject)
 	expected := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16}
+
 	var g, e int
+
 	if len(got) != len(expected) {
 		t.Error("TestRemoveOutlier Failed!")
 		t.Errorf("Expected slice legth of: %d, got: %d\n", len(expected), len(got))
