@@ -17,20 +17,8 @@ func ExtractParams(data []int) ([]int, []int) {
 }
 
 func PrematureGuess(input []int) (int, int) {
-	// Set window size and start/stop limits
-	windowSize := 10
-	end := len(input)
-	start := end - windowSize
-
-	// Handle window limits if data is less than window size
-	if start < 0 {
-		start = 0
-	}
-
-	window := input[start:end]
-
 	// Eliminate outliers from the window and calculate range
-	processed := maths.RemoveOutlier(window)
+	processed := maths.RemoveOutlier(input)
 
 	// Use average to establish upper and lower limits for a guess
 	average := maths.Mean(processed)

@@ -3,7 +3,6 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"log"
 	"os"
 	"strconv"
 
@@ -18,7 +17,8 @@ type FirstValue struct {
 
 func main() {
 	var upperLimit, lowerLimit int
-	var data []int
+	var rawData, cleanData []int
+	var sampleData []int                  // Used to purge outliers
 	c := FirstValue{IsEmpty: true}        // To capture value of x when y is zero
 	scanner := bufio.NewScanner(os.Stdin) // Initialize scanner
 
@@ -33,24 +33,33 @@ func main() {
 			c.IsEmpty = false
 		}
 
-		data = append(data, num)
+		rawData = append(rawData, num)
 
-		// Filter out empty files parsed as data
-		if len(data) == 0 {
-			log.Fatal("File parsed as data is empty.")
+		windowSize := 10
+		end := len(rawData)
+		start := end - windowSize
+
+		// Handle window limits if data is less than window size
+		if start < 0 {
+			start = 0
+		}
+
+		// Capture sample data from the last 10 inputs, remove outliers
+		sampleData = rawData[start:end]
+		sampleData = maths.RemoveOutlier(sampleData)
+
+		if len(rawData) > len(sampleData) && !maths.IsOutlier(num, sampleData) {
+			cleanData = append(cleanData, num)
 		}
 
 		// Establish input and output arrays as parameters
-		input, output := files.ExtractParams(data)
+		input, output := files.ExtractParams(cleanData)
 
 		if len(input) < 100 {
-			lowerLimit, upperLimit = files.PrematureGuess(data)
+			lowerLimit, upperLimit = files.PrematureGuess(sampleData)
 		} else {
 			// Calculate slope, y-intercept, and Pearson correlation coefficient to express linear regression and Pearson correlation coefficient
 			slope := maths.CalculateSlope(input, output)
-			// yIntercept := maths.CalculateYIntercept(input, output)
-			// PearsonCoefficient := maths.PearsonCoefficient(input, output)
-
 			y := slope*float64(len(input)) + float64(c.Value)
 
 			upperLimit = int(y) + 40
@@ -59,5 +68,4 @@ func main() {
 
 		fmt.Printf("%d %d\n", lowerLimit, upperLimit)
 	}
-
 }
