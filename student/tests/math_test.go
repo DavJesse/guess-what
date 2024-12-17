@@ -86,3 +86,16 @@ func TestPrematureGuess(t *testing.T) {
 		t.Error("TestPrematureGuess Failed")
 	}
 }
+
+func TestMedian(t *testing.T) {
+	intSlc := []int{1, 2, 3}
+	got := maths.Median(intSlc)
+	expected := float64(2)
+
+	// Compare 'got' and 'expected'
+	if got != expected {
+		t.Errorf("Got: %f", got)
+		t.Errorf("Expected: %f", expected)
+		t.Error("TestMedian Failed")
+	}
+}
