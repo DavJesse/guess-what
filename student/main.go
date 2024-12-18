@@ -62,7 +62,7 @@ func main() {
 			slope := maths.CalculateSlope(input, output)
 			y := slope*float64(len(input)) + float64(c.Value)
 
-			upperLimit = int(y) + 40
+			upperLimit = int(y) + 75
 			lowerLimit = int(y) - 100
 		}
 
