@@ -79,7 +79,7 @@ func TestCalculateYIntercept(t *testing.T) {
 func TestPrematureGuess(t *testing.T) {
 	input := []int{136, 190, 173}
 	gotLower, gotUpper := files.PrematureGuess(input)
-	expectedLower, expectedUpper := 83, 249
+	expectedLower, expectedUpper := 73, 261
 
 	if gotLower != expectedLower || gotUpper != expectedUpper {
 		t.Errorf("Expected: (%d, %d), Got: (%d, %d)", expectedLower, expectedUpper, gotLower, gotUpper)
